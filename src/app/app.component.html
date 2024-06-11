@@ -1,0 +1,18 @@
+<ng-container>
+  <mat-toolbar role="heading" color="primary">
+    <span>Uncertainty Calculator</span>
+  </mat-toolbar>
+  <mat-tab-group >
+    <mat-tab label="Indirect Measurements">
+      <ng-template matTabContent>
+        <app-indirect-form></app-indirect-form>
+      </ng-template>
+    </mat-tab>
+    <mat-tab label="Least Squares Method">
+      <ng-template matTabContent>
+        <app-least-squares-form></app-least-squares-form>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+    <app-about-component></app-about-component>
+</ng-container>

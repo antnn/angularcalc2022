@@ -1,0 +1,32 @@
+<div [formGroup]="form">
+  <ng-container [ngSwitch]="formElement.constructor">
+    <mat-form-field *ngSwitchCase="Textbox" [appHideFormEl]="formElement.hidden">
+    <input matInput [formControlName]="formElement.key" [placeholder]="formElement.label"  [appCanbeDisabled]="formElement.canbeDisabled"
+           [id]="formElement.key" [type]="formElement.type" [appHideFormEl]="formElement.hidden">
+      <mat-error *ngIf="hasError('syntaxError')">
+        Please enter a valid expression
+      </mat-error>
+      <mat-error *ngIf="hasError('required')">
+        {{formElement.label}} is required
+      </mat-error>
+      <mat-hint>{{formElement.hint}}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field *ngSwitchCase="Dropdown">
+      <mat-select [placeholder]="formElement.label" [id]="formElement.key" *ngSwitchCase="Dropdown" [formControlName]="formElement.key">
+        <mat-option *ngFor="let opt of formElement.options" [value]="opt.key">{{opt.value}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="subgroup" *ngSwitchCase="UserFormGroup">
+      <app-form-subgroup [formElements]="formElement.questions"
+                         [formGroupName]="formElement.key" [form]="form">
+
+        <span [innerHTML] ="formElement.label"></span>
+      </app-form-subgroup>
+      <mat-divider ></mat-divider>
+    </div>
+
+
+  </ng-container>
+</div>

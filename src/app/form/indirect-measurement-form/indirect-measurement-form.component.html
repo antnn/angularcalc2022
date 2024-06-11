@@ -1,0 +1,31 @@
+<ng-container>
+  <mat-card *ngIf="questions"><mat-card-content>
+    For the chi-square approximation to be valid, the expected frequency should be at least 5.
+    This test is not valid for small samples
+  </mat-card-content>
+  </mat-card>
+  <app-form *ngIf="questions" [formElements]="questions" (saved)="onSaved($event)"></app-form>
+  <app-form *ngIf="questions2" [formElements]="questions2" (saved)="onSaved2($event)"></app-form>
+  <app-form *ngIf="questions3" [formElements]="questions3" [appFormActions]="form_actions" (saved)="onSaved3($event)">
+    <div>
+      <mat-card-header>
+        <ng-container>Previous value:&nbsp;
+          <app-math-expr *ngIf="_previous" [expr]="_previous"></app-math-expr>
+        </ng-container>
+      </mat-card-header>
+    </div>
+  </app-form>
+  <mat-card *ngFor="let ren of rendered; let i = index; ">
+    <mat-card-subtitle>Number of try: {{i + 1}}</mat-card-subtitle>
+    <ng-container *ngFor="let ren1 of ren">
+      <app-math-expr [expr]="ren1.value"></app-math-expr>
+      <app-math-expr [expr]="ren1.sysError"></app-math-expr>
+      <app-math-expr [expr]="ren1.randomError"></app-math-expr>
+    </ng-container>
+  </mat-card>
+</ng-container>
+<ng-template cdkPortal #form_actions="cdkPortal">
+  <button [disabled]="showAddSeries()" mat-button (click)="addSeries($event)">Add Series</button>
+  <br>
+  <button [disabled]="showShowResults()" mat-button (click)="showResults($event)">Show Results</button>
+</ng-template>

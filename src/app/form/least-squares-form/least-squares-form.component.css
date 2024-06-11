@@ -1,0 +1,7 @@
+.mat-card-header {
+  flex-direction: column;
+  background-color:#E8EAF6;
+  padding: 8px 0 4px 8px;
+  margin-bottom: 0.5rem;
+  min-height:2.74rem;
+}

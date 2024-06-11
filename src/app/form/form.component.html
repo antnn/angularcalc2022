@@ -1,0 +1,17 @@
+<ng-container>
+  <mat-card>
+    <ng-content></ng-content>
+   <form (ngSubmit)="onSubmit()" [formGroup]="form" id="form1">
+     <mat-card-content>
+     <ng-container *ngFor="let element of formElements; first as isFirst; last as isLast;" >
+      <app-form-element [formElement]="element" [form]="form"
+                        [ngClass]="{'firstEl': isFirst, 'lastEl' : isLast }"></app-form-element>
+     </ng-container>
+     </mat-card-content>
+  </form>
+    <mat-card-actions>
+      <button mat-button id="submit-btn" color="primary" type="submit" form="form1" [disabled]="!form.valid">OK</button>
+      <ng-template [cdkPortalOutlet]="appFormActions"></ng-template>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>
